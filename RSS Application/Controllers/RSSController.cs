@@ -20,63 +20,55 @@ public class RSSController : BaseApiController
         => (this.feedService, this.userManager) = (feedService, userManager);
 
     string Host => $"{Request.Scheme}://{Request.Host}";
-    string GetUserId()
-        => userManager.GetUserId(base.User);
+    string UserId => userManager.GetUserId(base.User);
 
 
     [HttpGet]
     public async Task<IActionResult> GetAllFeedDocumentAsync()
     {
-        string userId = GetUserId();
-        string content = await feedService.GetAllFeedDocumentAsync(Host, userId);
+        string content = await feedService.GetAllFeedDocumentAsync(Host, UserId);
         return ContentRss(content);
     }
 
     [HttpGet("readed")]
     public async Task<IActionResult> GetReadedFeedDocumentAsync()
     {
-        string userId = GetUserId();
-        string content = await feedService.GetReadedFeedDocumentAsync(Host, userId);
+        string content = await feedService.GetReadedFeedDocumentAsync(Host, UserId);
         return ContentRss(content);
     }
 
     [HttpGet("readed/date")]
     public async Task<IActionResult> GetReadedFeedDocumentByDateAsync(DateTime startDate, DateTime endDate)
     {
-        string userId = GetUserId();
-        string content = await feedService.GetReadedFeedDocumentByDateAsync(Host, userId, startDate, endDate);
+        string content = await feedService.GetReadedFeedDocumentByDateAsync(Host, UserId, startDate, endDate);
         return ContentRss(content);
     }
 
     [HttpGet("unreaded")]
     public async Task<IActionResult> GetUnreadedFeedDocumentAsync()
     {
-        string userId = GetUserId();
-        string content = await feedService.GetUnreadedFeedDocumentAsync(Host, userId);
+        string content = await feedService.GetUnreadedFeedDocumentAsync(Host, UserId);
         return ContentRss(content);
     }
 
     [HttpGet("unreaded/date")]
     public async Task<IActionResult> GetUnreadedFeedDocumentByDateAsync(DateTime startDate, DateTime endDate)
     {
-        string userId = GetUserId();
-        string content = await feedService.GetUnreadedFeedDocumentByDateAsync(Host, userId, startDate, endDate);
+        string content = await feedService.GetUnreadedFeedDocumentByDateAsync(Host, UserId, startDate, endDate);
         return ContentRss(content);
     }
 
     [HttpGet("date")]
     public async Task<IActionResult> GetFeedDocumentByDateAsync(DateTime startDate, DateTime endDate)
     {
-        string userId = GetUserId();
-        string content = await feedService.GetFeedDocumentByDateAsync(Host, userId, startDate, endDate);
+        string content = await feedService.GetFeedDocumentByDateAsync(Host, UserId, startDate, endDate);
         return ContentRss(content);
     }
 
     [HttpGet("{id:long}")]
     public async Task<IActionResult> GetFeedDocumentByDateAsync(long id)
     {
-        string userId = GetUserId();
-        string content = await feedService.GetFeedDocumentByIdAsync(Host, userId, id);
+        string content = await feedService.GetFeedDocumentByIdAsync(Host, UserId, id);
         return ContentRss(content);
     }
 
