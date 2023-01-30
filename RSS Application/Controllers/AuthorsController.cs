@@ -20,8 +20,8 @@ public class AuthorsController : BaseApiController
         => (await authorService.GetAuthorsAsync()).Select(a => AuthorForJsonFormat(a));
 
     [HttpGet("{authorId:long}")]
-    public async Task<Author> GetAuthorByIdAsync(long postId)
-        => AuthorForJsonFormat(await authorService.GetAuthorByIdAsync(postId));
+    public async Task<Author> GetAuthorByIdAsync(long authorId)
+        => AuthorForJsonFormat(await authorService.GetAuthorByIdAsync(authorId));
 
     [HttpPost]
     public async Task<IActionResult> AddAuthorAsync([FromBody] Author author)
